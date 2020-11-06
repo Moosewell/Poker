@@ -74,7 +74,7 @@ namespace Poker.ConsoleApp
             game.ShowAllHands += OnShowAllHands;
             game.Winner += OnWinner;
             game.Draw += OnDraw;
-
+            
             game.RunGame();   
         }
 
