@@ -66,25 +66,23 @@ namespace Poker
             int matchingRank2 = 0;
             bool firstMatch1 = true;
             bool firstMatch2 = true;
-            Rank savedRank1 = 0;
-            Rank savedRank2 = 0;
+            Rank savedRank = 0;
             bool canSaveRank = true;
 
             for(var card = 0; card < 4; card++)
             {
-                savedRank1 = canSaveRank ? Hand[card].Rank : savedRank1;
+                savedRank = canSaveRank ? Hand[card].Rank : savedRank;
 
-                if(Hand[card].Rank == Hand[card + 1].Rank && Hand[card].Rank == savedRank1)
+                if(Hand[card].Rank == Hand[card + 1].Rank && Hand[card].Rank == savedRank)
                 {
                     matchingRank1 += firstMatch1 ? 2 : 1;
                     canSaveRank = false;
                     firstMatch1 = false;
                 }
-                if(Hand[card].Rank == Hand[card + 1].Rank && Hand[card].Rank != savedRank1)
+                if(Hand[card].Rank == Hand[card + 1].Rank && Hand[card].Rank != savedRank)
                 {
                     matchingRank2 += firstMatch2 ? 2 : 1;                   
                     firstMatch2 = false;
-                    savedRank2 = Hand[card].Rank;
                 }
             }
 
@@ -92,15 +90,12 @@ namespace Poker
             {
                 case 2:
                 pairs++;
-                pair1Value = savedRank1;
                 break;
                 case 3:
                 isThreeOfAKind = true;
-                threeOfAKindValue = savedRank1;
                 break;
                 case 4:
                 isFourOfAKind = true;
-                fourOfAKindValue = savedRank1;
                 break;
                 default:
                 break;
@@ -110,11 +105,9 @@ namespace Poker
             {
                 case 2:
                 pairs++;
-                pair2Value = savedRank2;
                 break;
                 case 3:
                 isThreeOfAKind = true;
-                threeOfAKindValue = savedRank2;
                 break;
                 default:
                 break;
