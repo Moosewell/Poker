@@ -31,10 +31,6 @@ namespace Poker.Lib
             Dealer dealer = new Dealer();
             while (true)
             {
-            foreach(Player player in Players)
-            {
-                player.ClearPiles();
-            }
             dealer.Shuffle();
             NewDeal();
             dealer.DealHands(Players);
@@ -52,8 +48,7 @@ namespace Poker.Lib
                 player.IdentifyHand();
             }
             ShowAllHands();
-            HandleResult(Players);
-            dealer.Restore(Players);
+            HandleResult(Players, dealer);
             }
         }
         public void Exit()
@@ -71,7 +66,7 @@ namespace Poker.Lib
             Environment.Exit(0);
         }
 
-        public void HandleResult(IPlayer[] players)
+        public void HandleResult(IPlayer[] players, Dealer dealer)
         {
             List<IPlayer> sameHandType = new List<IPlayer>();
             List<IPlayer> bestHand = new List<IPlayer>();
@@ -320,6 +315,7 @@ namespace Poker.Lib
             
             if(bestHand.Count > 1)
             {
+                dealer.Restore(Players);
                 Draw(bestHand.ToArray()); 
             }
             else
@@ -329,6 +325,7 @@ namespace Poker.Lib
                     if(player.Name == bestHand[0].Name && player.Hand == bestHand[0].Hand)
                     {
                         player.Wins++;
+                        dealer.Restore(Players);
                         Winner(player);
                     }
                 }
