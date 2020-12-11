@@ -4,7 +4,7 @@ using System;
 namespace Poker
 {
     [Serializable]
-    class Player : IPlayer
+    public class Player : IPlayer
     {
         public string Name { get; set; }
 
@@ -15,11 +15,6 @@ namespace Poker
         public int Wins {get; set;}
 
         public ICard[] Discard { get; set; }
-
-        public Rank threeOfAKindValue { get; set; }
-        public Rank fourOfAKindValue { get; set; }
-        public Rank pair1Value { get; set; }
-        public Rank pair2Value { get; set; }
 
         public Player(string name)
         {
@@ -32,12 +27,17 @@ namespace Poker
         public void DiscardCards()
         {
             Hand = Hand.Except(Discard).ToArray();
+            Discard = Discard.Where(card => card != null).ToArray();
         }
 
         public void DrawCards(ICard[] newCards)
         {
             Hand = Hand.Where(card => card != null).ToArray();
             Hand = Hand.Concat(newCards).ToArray();
+            if(Hand.Length > 5)
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public void SortHand()
@@ -120,7 +120,7 @@ namespace Poker
 
             for(var card = 0; card < 4; card++)
             {
-                if(Hand[card].Rank != Hand[card + 1].Rank - 1)
+                if((int)Hand[card].Rank != (int)Hand[card + 1].Rank - 1)
                 {
                     isStraight = false;
                 }
@@ -137,7 +137,7 @@ namespace Poker
             if((int)Hand[0].Rank == 2 && (int)Hand[1].Rank == 3 && (int)Hand[2].Rank == 4 && 
             (int)Hand[3].Rank == 5 && (int)Hand[4].Rank == 14)
             {
-                isFlush = true;
+                isStraight = true;
 
                 ICard[] temp = new ICard[1];
                 temp[0] = Hand[4];

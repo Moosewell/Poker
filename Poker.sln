@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poker.Lib", "Poker.Lib\Poker.Lib.csproj", "{F93F6896-EB82-45B5-A24E-976CE0D42508}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poker.Lib.UnitTest", "Poker.Lib.UnitTest\Poker.Lib.UnitTest.csproj", "{290E13BA-5668-4F63-BC37-1D6E3C76615B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerLib", "PokerLib\PokerLib.csproj", "{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +44,17 @@ Global
 		{290E13BA-5668-4F63-BC37-1D6E3C76615B}.Release|x64.Build.0 = Release|Any CPU
 		{290E13BA-5668-4F63-BC37-1D6E3C76615B}.Release|x86.ActiveCfg = Release|Any CPU
 		{290E13BA-5668-4F63-BC37-1D6E3C76615B}.Release|x86.Build.0 = Release|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Debug|x86.Build.0 = Debug|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Release|x64.Build.0 = Release|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1CD1E4C-16AF-4AAF-8164-1C86CE68AD50}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

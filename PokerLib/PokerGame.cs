@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.CompilerServices;
 
+[assembly:InternalsVisibleTo("Poker.Lib.UnitTest")]
 namespace Poker.Lib
 {
     class PokerGame : IPokerGame
     {
         public IPlayer[] Players { get; set;}
+
+        public bool gameAlive { get; set;}
 
         public PokerGame(string[] playernames)
         {
@@ -29,7 +33,8 @@ namespace Poker.Lib
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Dealer dealer = new Dealer();
-            while (true)
+            gameAlive = true;
+            while (gameAlive)
             {
             dealer.Shuffle();
             NewDeal();
@@ -53,7 +58,7 @@ namespace Poker.Lib
         }
         public void Exit()
         {
-            Environment.Exit(0);
+            gameAlive = false;
         }
 
         public void SaveGameAndExit(string fileName)
@@ -63,7 +68,7 @@ namespace Poker.Lib
             IFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, Players);
             stream.Close();
-            Environment.Exit(0);
+            gameAlive = false;
         }
 
         public void HandleResult(IPlayer[] players, Dealer dealer)

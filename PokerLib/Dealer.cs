@@ -6,7 +6,7 @@ namespace Poker
 {
     class Dealer
     {
-        ICard[] Deck;
+        internal ICard[] Deck;
         public Dealer()
         {
             Deck = new ICard[52];
@@ -19,7 +19,6 @@ namespace Poker
                         deckPosition++;
                     }
                 }
-
         }
         public void Shuffle()
         {
@@ -48,8 +47,8 @@ namespace Poker
             Deck = Deck.Where(card => card != null).ToArray();
             foreach (Player player in players)
             {
-                Deck = Deck.Concat(player.Hand).ToArray();
-                Deck = Deck.Concat(player.Discard).ToArray();
+                Deck = Deck.Concat(player.Hand.Where(card => card != null)).ToArray();
+                Deck = Deck.Concat(player.Discard.Where(card => card != null)).ToArray();
                 player.Hand = new ICard[5];
                 player.Discard = new ICard[5];
             }

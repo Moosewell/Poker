@@ -3,7 +3,7 @@ using System;
 namespace Poker
 {
     [Serializable]
-    public class Card : ICard
+    class Card : ICard
     {
         public Card(Suite suite, Rank rank)
         {
