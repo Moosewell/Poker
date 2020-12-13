@@ -96,9 +96,9 @@ namespace Poker.Lib
                 
                 case var handType when handType == HandType.StraightFlush || handType == HandType.Straight:
                 bestHand.Add(sameHandType[0]);
-                for(var player = 0; player < sameHandType.Count - 2; player++)
+                for(var player = 1; player < sameHandType.Count - 2; player++)
                 {   
-                    if(sameHandType[player].Hand[4].Rank == sameHandType[player + 1].Hand[4].Rank)
+                    if(sameHandType[0].Hand[0].Rank == sameHandType[player].Hand[0].Rank)
                     {
                         bestHand.Add(sameHandType[player + 1]);
                     }
@@ -107,26 +107,37 @@ namespace Poker.Lib
 
                 case var handType when handType == HandType.Flush:
                 IPlayer bestPlayer = sameHandType[0];
-                for(var player = 1; player < sameHandType.Count - 2; player++)
+                foreach (IPlayer player in sameHandType)
                 {
-                    int sameRank = 0;
                     for(var card = 4; card >= 0; card--)
                     {
-                        if(bestPlayer.Hand[card].Rank <= sameHandType[player].Hand[card].Rank)
+                        if(bestPlayer.Hand[card].Rank < player.Hand[card].Rank)
                         {
-                            bestPlayer = sameHandType[player];
+                            bestPlayer = player;
+                            break;
                         }
-                        else
+                        if(bestPlayer.Hand[card].Rank > player.Hand[card].Rank)
                         {
-                            sameRank++;
+                            break;
                         }
-                    }
-                    if(sameRank == 5)
+                    }   
+                }
+                var bestPlayerHand = bestPlayer.Hand.Select(c => c.Rank);
+                foreach(IPlayer player in sameHandType)
+                {
+                    int matchingCards = 0;
+                    for(var card = 0; card < 5; card++)
                     {
-                        bestHand.Add(sameHandType[player]);
+                        if(bestPlayer.Hand[card].Rank == player.Hand[card].Rank)
+                        {
+                            matchingCards++;
+                        }
+                    }   
+                    if(matchingCards == 5)
+                    {
+                        bestHand.Add(player);
                     }
                 }
-                bestHand.Add(bestPlayer);
                 break;
 
                 case var handType when handType == HandType.FullHouse || handType == HandType.ThreeOfAKind || handType == HandType.FourOfAKind:
@@ -136,6 +147,10 @@ namespace Poker.Lib
                     if(bestPlayer.Hand[2].Rank < player.Hand[2].Rank)
                     {
                         bestPlayer = player;
+                    }
+                    if(bestPlayer.Hand.SequenceEqual(player.Hand) && bestPlayer != player)
+                    {
+                        bestHand.Add(player);
                     }
                 }
                 bestHand.Add(bestPlayer);
@@ -299,7 +314,7 @@ namespace Poker.Lib
                         }
                     }   
                 }
-                var bestPlayerHand = bestPlayer.Hand.Select(c => c.Rank);
+                bestPlayerHand = bestPlayer.Hand.Select(c => c.Rank);
                 foreach(IPlayer player in sameHandType)
                 {
                     int matchingCards = 0;
